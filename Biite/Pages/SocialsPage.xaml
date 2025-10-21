@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.SocialsPage"
+             Title="Socials">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- search friends  -->
+            <Frame BackgroundColor="GhostWhite" Padding="15" CornerRadius="12">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Search Friends" FontAttributes="Bold" FontSize="16"/>
+                    <SearchBar Placeholder="Search for friends..." 
+                               Text="{Binding SearchText}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- friend rquests -->
+            <Frame BackgroundColor="GhostWhite" Padding="15" CornerRadius="12">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Friend Requests" FontAttributes="Bold" FontSize="16"/>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto" ColumnSpacing="10">
+                        <Frame Grid.Column="0" BackgroundColor="#E4A44D" CornerRadius="20" Padding="10" HeightRequest="40" WidthRequest="40">
+                            <Label Text="P" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Frame>
+
+                        <Label Grid.Column="1" Text="Lachlan Golding" VerticalOptions="Center" FontSize="14"/>
+
+                        <Button Grid.Column="2" Text="Accept" BackgroundColor="Green" TextColor="White" FontSize="12" Padding="5" Clicked="OnAcceptFriendRequestClicked"/>
+
+                        <Button Grid.Column="3" Text="Decline" BackgroundColor="Red" TextColor="White" FontSize="12" Padding="5" Clicked="OnDeclineFriendRequestClicked"/>
+                    </Grid>
+                    
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto" ColumnSpacing="10">
+                        <Frame Grid.Column="0" BackgroundColor="#E4A44D" CornerRadius="20" Padding="10" HeightRequest="40" WidthRequest="40">
+                            <Label Text="P" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Frame>
+
+                        <Label Grid.Column="1" Text="Bethany Phillips" VerticalOptions="Center" FontSize="14"/>
+
+                        <Button Grid.Column="2" Text="Accept" BackgroundColor="Green" TextColor="White" FontSize="12" Padding="5" Clicked="OnAcceptFriendRequestClicked"/>
+
+                        <Button Grid.Column="3" Text="Decline" BackgroundColor="Red" TextColor="White" FontSize="12" Padding="5" Clicked="OnDeclineFriendRequestClicked"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- connected friemds -->
+            <Frame BackgroundColor="GhostWhite" Padding="15" CornerRadius="12">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Connected Friends" FontAttributes="Bold" FontSize="16"/>
+
+                    <CollectionView ItemsSource="{Binding ConnectedFriends}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" Padding="5">
+                                    <Frame Grid.RowSpan="2" BackgroundColor="#E4A44D" 
+                                           CornerRadius="20" Padding="10" HeightRequest="40" WidthRequest="40">
+                                        <Label Text="P" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+
+                                    <Label Grid.Column="1" Grid.Row="0" 
+                                           Text="{Binding Name}" 
+                                           FontAttributes="Bold" FontSize="16"/>
+
+                                    <Label Grid.Column="1" Grid.Row="1" 
+                                           Text="{Binding Email}" 
+                                           FontSize="12" TextColor="Gray"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

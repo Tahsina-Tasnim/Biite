@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.ReviewsPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="ReviewsPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20">
+
+            <Label Text="My Reviews" FontAttributes="Bold" FontSize="20" Margin="0,0,0,20"/>
+
+            <!-- list for reviews -->
+            <CollectionView ItemsSource="{Binding UserReviews}">
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Text="No reviews added yet" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
+                            <Label Text="Add your first review to get started!" FontSize="14" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0"/>
+                        </VerticalStackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView> 
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="GhostWhite" Padding="15" Margin="0,0,0,10" CornerRadius="12">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+
+                                <!-- name mandatory --> 
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding RestaurantName}" FontAttributes="Bold" FontSize="16"/>
+
+                                <!-- star display mandatory -->
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding StarsDisplay}" FontSize="16" TextColor="Orange"/>
+
+                                <!-- description of review optional-->
+                                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding ReviewSnippet}" FontSize="14" Margin="0,5,0,0"/>
+
+                                <!-- location-->
+                                <Label Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding LocationDisplay}" FontSize="10" TextColor="Gray" Margin="0,2,0,0"/>
+
+                                <!-- date -->
+                                <Label Grid.Row="2" Grid.ColumnSpan="4" Text="{Binding ReviewDate, StringFormat='{0:MMM dd, yyyy}'}" FontSize="12" TextColor="Gray" Margin="0,5,0,0"/>
+
+                                <Frame Grid.Row="1" IsVisible="{Binding HasPhoto}" Padding="0" CornerRadius="8" HeightRequest="200" HasShadow="False" Margin="0,5">
+                                    <Image Source="{Binding ImageFilePath}" Aspect="AspectFill"/>
+                                </Frame>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

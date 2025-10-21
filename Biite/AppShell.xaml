@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Biite.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Biite.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Biite">
+
+
+    <TabBar Route="tabs"
+            Shell.TabBarBackgroundColor="NavajoWhite"
+            Shell.TabBarForegroundColor="#E4A44D" 
+            Shell.TabBarTitleColor="#E4A44D"
+            Shell.TabBarUnselectedColor="DarkGrey">
+        <ShellContent Title="Home"     Route="home"  Icon="home.png"  ContentTemplate="{DataTemplate pages:HomePage}" />
+        <ShellContent Title="Discover" Route="discover" Icon="discover.png" ContentTemplate="{DataTemplate pages:DiscoverPage}" />
+        <ShellContent Title="Events"   Route="events" Icon="events.png"  ContentTemplate="{DataTemplate pages:EventsPage}" />
+        <ShellContent Title="Socials"  Route="socials" Icon="socials.png" ContentTemplate="{DataTemplate pages:SocialsPage}" />
+        <ShellContent Title="Profile"  Route="profile" Icon="profile.png" ContentTemplate="{DataTemplate pages:ProfilePage}" />
+    </TabBar>
+
+</Shell>
+
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.DiscoverPage"
+             Title="Discover"
+             BackgroundColor="#F5F5DC">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="16">
+
+            <!-- Trending Now Section -->
+            <Label Text="Trending Now" FontSize="24" FontAttributes="Bold" TextColor="Black" Margin="0,10,0,10"/>
+
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="15" ColumnSpacing="15">
+
+                
+                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <StackLayout Spacing="8">
+                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Label Text="Sushi" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
+                        <Label Text="Japanese" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
+                    </StackLayout>
+                </Frame>
+
+              
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <StackLayout Spacing="8">
+                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Label Text="Pizza" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
+                        <Label Text="Italian" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
+                    </StackLayout>
+                </Frame>
+
+               
+                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <StackLayout Spacing="8">
+                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Label Text="Burger" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
+                        <Label Text="American" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
+                    </StackLayout>
+                </Frame>
+
+               
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <StackLayout Spacing="8">
+                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Label Text="Tacos" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
+                        <Label Text="Mexican" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
+                    </StackLayout>
+                </Frame>
+
+            </Grid>
+
+            <!-- top rated by friends -->
+            <Label Text="Top Rated by Friends" FontSize="24" FontAttributes="Bold" TextColor="Black" Margin="0,20,0,10"/>
+
+            <!-- friend recommendations -->
+            <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="16">
+                <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
+                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <StackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="The Garden Table" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Fine dining restaurant" FontSize="14" TextColor="Gray"/>
+                    </StackLayout>
+                    <Label Grid.Column="2" Text="4.8" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            
+            <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="16">
+                <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
+                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <StackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="Coastal Kitchen" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Seafood restaurant" FontSize="14" TextColor="Gray"/>
+                    </StackLayout>
+                    <Label Grid.Column="2" Text="4.6" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+           
+            <Frame BackgroundColor="White" 
+                   CornerRadius="10" 
+                   HasShadow="True" 
+                   Padding="16">
+                <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
+                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <StackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="Urban Spice" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Indian restaurant" FontSize="14" TextColor="Gray"/>
+                    </StackLayout>
+                    <Label Grid.Column="2" Text="4.7" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

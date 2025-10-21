@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.EventsPage"
+             Title="Events">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Button Text="Create Event" BackgroundColor="#E4A44D" TextColor="Black" Clicked="CreateEvent_Clicked"/>
+
+            <!-- upcoming events -->
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Upcoming Events" FontAttributes="Bold" FontSize="18"/>
+
+                <CollectionView ItemsSource="{Binding UpcomingEvents}">
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <Label Text="No upcoming events" FontSize="14" TextColor="Gray" HorizontalOptions="Center"/>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="GhostWhite" Padding="15" Margin="0,0,0,10" CornerRadius="12">
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
+
+                                    <Button Grid.Row="0" Grid.Column="1" Text="View" BackgroundColor="#E4A44D" TextColor="Black" FontSize="12" 
+                                            Padding="8,4" Clicked="OnViewEventClicked"/>
+
+                                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding When}" FontSize="14" TextColor="DarkGray"/>
+
+                                    <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding TotalPeople, StringFormat='{0} people attending'}" 
+                                           FontSize="12" TextColor="Gray"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- past events -->
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Past Events" FontAttributes="Bold" FontSize="18"/>
+
+                <CollectionView ItemsSource="{Binding PastEvents}">
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <Label Text="No past events" FontSize="14" TextColor="Gray" HorizontalOptions="Center"/>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="LightGray" Padding="15" Margin="0,0,0,10" CornerRadius="12" Opacity="0.7">
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*">
+
+                                    <Label Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
+
+                                    <Label Grid.Row="1" Text="{Binding When}" FontSize="14" TextColor="DarkGray"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>    

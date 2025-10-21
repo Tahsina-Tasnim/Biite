@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.CreateEventsPage"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             Title="CreateEvents">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- event details -->
+            <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Event Details" FontAttributes="Bold" FontSize="18"/>
+
+                    <Entry x:Name="EventTitleEntry" Placeholder="Event name"/>
+
+                    <Label Text="Date:" FontAttributes="Bold"/>
+                    <DatePicker x:Name="EventDatePicker" MinimumDate="{x:Static system:DateTime.Today}"/>
+
+                    <Label Text="Time:" FontAttributes="Bold"/>
+                    <TimePicker x:Name="EventTimePicker"/>
+
+                    <Entry x:Name="EventLocationEntry" Placeholder="Location"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- dining preference -->
+            <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dining Preferences" FontAttributes="Bold" FontSize="18"/>
+                    <Label Text="(Coming soon)" TextColor="Gray" FontAttributes="Italic"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- invite friends -->
+            <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Invite Friends" FontAttributes="Bold" FontSize="18"/>
+
+                    <CollectionView ItemsSource="{Binding AvailableFriends}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto" ColumnSpacing="10" Padding="5">
+                                    <CheckBox Grid.Column="0" CheckedChanged="OnFriendSelectionChanged"/>
+                                    <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" FontSize="16"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label x:Name="SelectedCountLabel" Text="Selected: 0 friends" FontSize="14" TextColor="DarkGray"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            
+            <Button Text="Create Event" BackgroundColor="#E4A44D" TextColor="Black" FontAttributes="Bold" Clicked="OnCreateEventClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

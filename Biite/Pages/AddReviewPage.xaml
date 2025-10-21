@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Biite.Pages.AddReviewPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="AddReviewPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
+                <VerticalStackLayout Spacing="15">
+
+                   
+                    <Label Text="Restaurant Name" FontAttributes="Bold" FontSize="16"/>
+                    <Entry x:Name="RestaurantNameEntry" 
+                           Placeholder="Enter restaurant name" 
+                           Text="{Binding RestaurantName}"/>
+
+                <!-- used template from microsoft website-->
+                   <!-- figure out how to use the toolkit RatingView and why doesnt it work even tho correct packages installed
+                     ASK ABOUT ISSUES IN SLIDES-->
+                    <Label Text="Your Rating" FontAttributes="Bold" FontSize="16"/>
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
+                        <Button x:Name="Star1" Text="★" FontSize="30" BackgroundColor="Transparent" TextColor="Gray" Clicked="OnStarClicked" Padding="5"/>
+                        <Button x:Name="Star2" Text="★" FontSize="30" BackgroundColor="Transparent" TextColor="Gray" Clicked="OnStarClicked" Padding="5"/>
+                        <Button x:Name="Star3" Text="★" FontSize="30" BackgroundColor="Transparent" TextColor="Gray" Clicked="OnStarClicked" Padding="5"/>
+                        <Button x:Name="Star4" Text="★" FontSize="30" BackgroundColor="Transparent" TextColor="Gray" Clicked="OnStarClicked" Padding="5"/>
+                        <Button x:Name="Star5" Text="★" FontSize="30" BackgroundColor="Transparent" TextColor="Gray" Clicked="OnStarClicked" Padding="5"/>
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="RatingLabel" Text="Rating: 0 stars" FontSize="14" TextColor="DarkGray"/>
+
+
+                    <Label Text="Review (Optional)" FontAttributes="Bold" FontSize="16"/>
+                    <Editor x:Name="ReviewTextEditor" 
+                            Placeholder="Share your experience..." 
+                            HeightRequest="100" 
+                            Text="{Binding ReviewText}"/>
+
+                    <!--photo upload section -->
+                    <Label Text="Add Photo (Optional)" FontAttributes="Bold" FontSize="16"/>
+                    <Button Text="📷 Add Food Photo" BackgroundColor="LightGray" TextColor="Black" Clicked="OnAddPhotoClicked" Margin="0,5"/>
+
+                    <!-- image preview -->
+                    <Frame x:Name="PhotoPreviewFrame" IsVisible="False" Padding="0" CornerRadius="12" HeightRequest="200" HasShadow="True">
+                        <Grid>
+                            <Image x:Name="PhotoPreview" Aspect="AspectFill"/>
+                            <Button Text="✕" FontSize="20" BackgroundColor="#E4A44D" TextColor="White" WidthRequest="40" HeightRequest="40" 
+                                    CornerRadius="20" HorizontalOptions="End" VerticalOptions="Start" Margin="10" Clicked="OnRemovePhotoClicked"/>
+                        </Grid>
+                    </Frame> 
+
+
+                    <Button Text="Save Review" BackgroundColor="#E4A44D" TextColor="Black" Clicked="OnSaveReviewClicked"/>
+
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
