@@ -6,7 +6,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-
             <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
                 <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="15">
 
@@ -19,19 +18,19 @@
                                     <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
                                 </Image.Clip>
                             </Image>
-                            <!-- shows letter P if no image-->
-                            <Label x:Name="DefaultProfileLabel" Text="P" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="True"/>
+                            <!-- shows first letter of name if no image-->
+                            <Label x:Name="DefaultProfileLabel" Text="{Binding UserName, StringFormat='{0:C1}'}" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="True"/>
                         </Grid>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnProfileImageTapped"/>
                         </Frame.GestureRecognizers>
                     </Frame>
 
-                    
-                    <Label Grid.Column="1" Text="Your Name" FontAttributes="Bold" FontSize="18"/>
-                    <Label Grid.Column="1" Grid.Row="1" Text="just a girl" FontSize="14" TextColor="Gray"/>
 
-                     <!-- added the number of reviews from sql instead of just having a text in place like before-->
+                    <Label Grid.Column="1" Text="{Binding UserName}" FontAttributes="Bold" FontSize="18"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding UserBio}" FontSize="14" TextColor="Gray"/>
+
+                    <!-- added the number of reviews from sql instead of just having a text in place like before-->
                     <Label Grid.Column="1" Grid.Row="2" Text="{Binding ReviewCountText}" FontSize="12" TextColor="#E4A44D" Margin="0,10,0,0"/>
 
 
@@ -41,17 +40,19 @@
                     </HorizontalStackLayout>
                 </Grid>
             </Frame>
-            <!-- preferneces -->
+
+            <!-- preferences -->
             <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Your Dietary Preferences" FontAttributes="Bold" FontSize="16"/>
                     <Frame BackgroundColor="#E4A44D" CornerRadius="15" Padding="8,5" HorizontalOptions="Start">
-                        <Label Text="Vegetarian" TextColor="White" FontSize="12"/>
+                        <Label Text="{Binding DietaryRestriction}" TextColor="White" FontSize="12"/>
                     </Frame>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- recent act -->
+            <!-- recent activity -->
+          <VerticalStackLayout Spacing="16" IsVisible="{Binding HasRecentReview}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -59,7 +60,6 @@
                 </Grid.RowDefinitions>
                 <Grid ColumnDefinitions="*,Auto">
                     <Label Text="My Recent Reviews" FontAttributes="Bold" FontSize="18"/>
-
                 </Grid>
                 <Frame Grid.Row="1" Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.9">
                     <VerticalStackLayout>
@@ -69,6 +69,7 @@
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
+          </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

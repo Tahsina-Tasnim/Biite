@@ -4,10 +4,8 @@
              x:Class="Biite.Pages.SetUpPage"
              Title="Setup">
 
-    
-    <ScrollView>
-        
 
+    <ScrollView>
         <Grid Padding="24">
             <Grid RowDefinitions="*,Auto,*">
                 <Frame Grid.Row="1" Padding="20" CornerRadius="16" BackgroundColor="GhostWhite" HasShadow="True">
@@ -19,6 +17,8 @@
                         <Entry Placeholder="Your Email" Text="{Binding Email}"/>
                         <Entry Placeholder="Your Phone Number" Text="{Binding PhoneNumber}"/>
                         <Entry Placeholder="City or area" Text="{Binding Location}"/>
+                        <Entry Placeholder="Your Dietary Restriction" Text="{Binding Restriction}"/>
+                        <Entry Placeholder="Your Password" Text="{Binding Password}"/>
 
 
                         <Button Text="Save and Continue" BackgroundColor="#E4A44D" TextColor="Black" Clicked="OnSaveClicked"/>

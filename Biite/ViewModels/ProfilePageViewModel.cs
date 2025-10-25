@@ -1,90 +1,139 @@
 using Biite.Models;
 using Biite.Services;
-using SQLite;
-
+using System.Collections.ObjectModel;
 
 namespace Biite.ViewModels
 {
-
-    internal class ProfilePageViewModel : ObservableObject
+    public class ProfilePageViewModel : ObservableObject
     {
         public static ProfilePageViewModel Current { get; set; }
-        SQLiteConnection connection;
+        private User currentUser;
+        private string userName;
+        private string userBio;
+        private string dietaryRestriction;
+        private string profileImagePath;
+        private Review lastReview;
+        private int reviewCount;
 
         public ProfilePageViewModel()
         {
             Current = this;
-            connection = DatabaseService.Connection;
+            LoadUserData();
         }
 
-        public Review LastReview
+        // loads data for the currently logged-in user
+        private void LoadUserData()
         {
-            get
-            {
-                return connection.Table<Review>().OrderByDescending(r => r.ReviewDate).FirstOrDefault();
-            }
-        }
-        public int ReviewCount
-        {
-            get
-            {
-                return connection.Table<Review>().Count();
-            }
-        }
+            currentUser = DatabaseService.GetCurrentUser();
 
-        // property for displaying review count with proper singular/plural
-        public string ReviewCountText
-        {
-            get
+            if (currentUser != null)
             {
-                int count = ReviewCount;
-                if (count == 1)
-                    return "1 review • 24 friends";
-                else
-                    return $"{count} reviews • 24 friends";
+                UserName = currentUser.Name;
+                UserBio = $"{currentUser.Location}"; // location as bio
+                DietaryRestriction = string.IsNullOrEmpty(currentUser.Restriction) ? "None" : currentUser.Restriction;
+                ProfileImagePath = currentUser.ImageFilePath;
+
+                // load user specific review data
+                ReviewCount = DatabaseService.GetUserReviewCount(currentUser.Id);
+                LastReview = DatabaseService.GetLastReviewForUser(currentUser.Id);
+
+                
             }
         }
 
-        // added property to get current users profile image if any
+        // refreshes all user data (called when page appears)
+        public void RefreshData()
+        {
+            LoadUserData();
+        }
+
+        // properties with change notification
+        public string UserName
+        {
+            get => userName;
+            set
+            {
+                userName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string UserBio
+        {
+            get => userBio;
+            set
+            {
+                userBio = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DietaryRestriction
+        {
+            get => dietaryRestriction;
+            set
+            {
+                dietaryRestriction = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string ProfileImagePath
         {
-            get
+            get => profileImagePath;
+            set
             {
-                var user = connection.Table<User>().FirstOrDefault();
-                return user?.ImageFilePath;
-            }
-        }
-
-        // property to check if user has a profile image
-        public bool HasProfileImage
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ProfileImagePath) && File.Exists(ProfileImagePath);
-            }
-        }
-
-        // added new method to update users profile image
-        public void UpdateProfileImage(string imagePath)
-        {
-            var user = connection.Table<User>().FirstOrDefault();
-            if (user != null)
-            {
-                user.ImageFilePath = imagePath;
-                connection.Update(user);
-                OnPropertyChanged(nameof(ProfileImagePath));
+                profileImagePath = value;
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(HasProfileImage));
             }
         }
+        // fix for the UI issue for new users without reviews
+        // true if lastReview exists
+        public bool HasRecentReview => LastReview != null;
 
-        public void RefreshData()
+        
+
+        public Review LastReview
         {
-            OnPropertyChanged(nameof(LastReview));
-            OnPropertyChanged(nameof(ReviewCount));
-            OnPropertyChanged(nameof(ReviewCountText));
-            OnPropertyChanged(nameof(ProfileImagePath));
-            OnPropertyChanged(nameof(HasProfileImage));
+            get => lastReview;
+            set
+            {
+                lastReview = value;
+                OnPropertyChanged();
+
+                OnPropertyChanged(nameof(HasRecentReview));
+              
+            }
         }
+
+        public int ReviewCount
+        {
+            get => reviewCount;
+            set
+            {
+                reviewCount = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ReviewCountText));
+            }
+        }
+
+        // computed properties
+        public string ReviewCountText => $"{ReviewCount} {(ReviewCount == 1 ? "review" : "reviews")}";
+
+        public bool HasProfileImage => !string.IsNullOrEmpty(ProfileImagePath) && File.Exists(ProfileImagePath);
+
+        // updates profile image and saves to database
+        public void UpdateProfileImage(string imagePath)
+        {
+            if (currentUser != null)
+            {
+                ProfileImagePath = imagePath;
+                DatabaseService.UpdateUserProfileImage(currentUser.Id, imagePath);
+            }
+        }
+
+        
+
     }
 }
-

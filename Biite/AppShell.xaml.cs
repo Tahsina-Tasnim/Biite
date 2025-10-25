@@ -14,7 +14,7 @@ namespace Biite
             Routing.RegisterRoute(nameof(CreateEventsPage), typeof(CreateEventsPage));
             Routing.RegisterRoute(nameof(AddReviewPage), typeof(AddReviewPage));
             Routing.RegisterRoute(nameof(ReviewsPage), typeof(ReviewsPage));
-
+            Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
 
         }
     }

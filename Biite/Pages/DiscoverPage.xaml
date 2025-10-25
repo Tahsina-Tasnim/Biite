@@ -8,42 +8,101 @@
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="16">
 
-            <!-- Trending Now Section -->
+            <Frame BackgroundColor="GhostWhite" Padding="12" CornerRadius="25" HasShadow="True">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSearchBarTapped"/>
+                </Frame.GestureRecognizers> 
+                <HorizontalStackLayout Spacing="10">
+                    <Image Source="search.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                    <!--<Label Text="🔍" FontSize="20" VerticalOptions="Center"/>-->
+                    <Label Text="Search restaurants on map..." TextColor="Gray" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Label Text="Pinned Restaurants" FontAttributes="Bold" FontSize="24"/>
+            <CollectionView ItemsSource="{Binding Nearby}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="12" CornerRadius="12" Margin="0,0,0,10" BackgroundColor="GhostWhite" Opacity="0.92">
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding Cuisine}"/>
+                                <HorizontalStackLayout Grid.Column="1" Grid.RowSpan="1" Spacing="8" VerticalOptions="Center">
+                                    <Label Text="{Binding Price}"/>
+                                    <Label Text="{Binding Rating, StringFormat='{0:0.0} stars'}"/>
+                                    <Label Text="{Binding DistanceKm, StringFormat='{0:0.0} km'}"/>
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Trending Now Section also clicking on card takes you to the specified cuisine around newcastle as rated by tripadvisor-->
             <Label Text="Trending Now" FontSize="24" FontAttributes="Bold" TextColor="Black" Margin="0,10,0,10"/>
 
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="15" ColumnSpacing="15">
 
-                
+                <!--sushi-->
                 <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <Frame.GestureRecognizers> 
+                        <TapGestureRecognizer Tapped="OnCardTapped" 
+                        CommandParameter="https://www.tripadvisor.com.au/Restaurants-g255325-c38-Newcastle_Greater_Newcastle_New_South_Wales.html"/> 
+                    </Frame.GestureRecognizers>
                     <StackLayout Spacing="8">
-                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Border HeightRequest="120" Padding="0" StrokeThickness="0" 
+                                StrokeShape="RoundRectangle 10,10,0,0">
+                            <Image Source="sushi.png" Aspect="AspectFill"/>
+                        </Border>
                         <Label Text="Sushi" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
                         <Label Text="Japanese" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
                     </StackLayout>
                 </Frame>
 
-              
-                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+               <!--pizza-->
+                <Frame  Grid.Row="0" Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCardTapped" 
+                        CommandParameter="https://www.tripadvisor.com.au/Restaurants-g255325-c31-Newcastle_Greater_Newcastle_New_South_Wales.html"/>
+                    </Frame.GestureRecognizers>
                     <StackLayout Spacing="8">
-                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Border HeightRequest="120" Padding="0" StrokeThickness="0" 
+                                StrokeShape="RoundRectangle 10,10,0,0">
+                            <Image Source="pizza.png" Aspect="AspectFill"/>
+                        </Border>
                         <Label Text="Pizza" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
                         <Label Text="Italian" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
                     </StackLayout>
                 </Frame>
 
-               
+               <!--burger-->
                 <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCardTapped" 
+                        CommandParameter="https://www.tripadvisor.com.au/Restaurants-g255325-zfd10907-Newcastle_Greater_Newcastle_New_South_Wales-Hamburger.html"/>
+                    </Frame.GestureRecognizers>
                     <StackLayout Spacing="8">
-                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Border HeightRequest="120" Padding="0" StrokeThickness="0" 
+                                StrokeShape="RoundRectangle 10,10,0,0">
+                            <Image Source="burger.png" Aspect="AspectFill"/>
+                        </Border>
                         <Label Text="Burger" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
                         <Label Text="American" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
                     </StackLayout>
                 </Frame>
 
-               
+               <!--tacos-->
                 <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCardTapped" 
+                        CommandParameter="https://www.tripadvisor.com.au/Restaurants-g255325-zfd19954-Newcastle_Greater_Newcastle_New_South_Wales-Tacos.html"/>
+                    </Frame.GestureRecognizers>
                     <StackLayout Spacing="8">
-                        <BoxView BackgroundColor="LightGray" HeightRequest="120" CornerRadius="10,10,0,0"/>
+                        <Border HeightRequest="120" Padding="0" StrokeThickness="0" 
+                                StrokeShape="RoundRectangle 10,10,0,0">
+                            <Image Source="tacos.png" Aspect="AspectFill"/>
+                        </Border>
                         <Label Text="Tacos" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" Margin="8,0"/>
                         <Label Text="Mexican" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="8,0,8,8"/>
                     </StackLayout>
@@ -51,43 +110,60 @@
 
             </Grid>
 
-            <!-- top rated by friends -->
+            <!-- top rated by friends  also clicking on card takes you to the specified restaurants around newcastle -->
             <Label Text="Top Rated by Friends" FontSize="24" FontAttributes="Bold" TextColor="Black" Margin="0,20,0,10"/>
 
             <!-- friend recommendations -->
+            
+            <!--Banana Blossom-->
             <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="16">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCardTapped" 
+                   CommandParameter="https://bananablossomsalads.com/"/>
+                </Frame.GestureRecognizers>
                 <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
-                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <Border Grid.Column="0" WidthRequest="60" HeightRequest="60" StrokeShape="RoundRectangle 8" Padding="0" StrokeThickness="0">
+                        <Image Source="salad.png" Aspect="AspectFill"/>
+                    </Border>
                     <StackLayout Grid.Column="1" Spacing="4">
-                        <Label Text="The Garden Table" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Fine dining restaurant" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Banana Blossom Salads" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Salad Bar" FontSize="14" TextColor="Gray"/>
                     </StackLayout>
                     <Label Grid.Column="2" Text="4.8" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
                 </Grid>
             </Frame>
 
-            
+           <!--The Kingfish restaurant--> 
             <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="16">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCardTapped" 
+                    CommandParameter="https://thekingfish.com.au/"/>
+                </Frame.GestureRecognizers>
                 <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
-                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <Border Grid.Column="0" WidthRequest="60" HeightRequest="60" StrokeShape="RoundRectangle 8" Padding="0" StrokeThickness="0">
+                        <Image Source="seafood.png" Aspect="AspectFill"/>
+                    </Border>
                     <StackLayout Grid.Column="1" Spacing="4">
-                        <Label Text="Coastal Kitchen" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="The Kingfish" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="Seafood restaurant" FontSize="14" TextColor="Gray"/>
                     </StackLayout>
                     <Label Grid.Column="2" Text="4.6" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
                 </Grid>
             </Frame>
 
-           
-            <Frame BackgroundColor="White" 
-                   CornerRadius="10" 
-                   HasShadow="True" 
-                   Padding="16">
+           <!--Royal indian restobar-->
+            <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" Padding="16">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCardTapped" 
+                    CommandParameter="https://royalindianrestobar.com.au/"/>
+                </Frame.GestureRecognizers>
                 <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="12">
-                    <BoxView Grid.Column="0" BackgroundColor="LightGray" WidthRequest="60" HeightRequest="60" CornerRadius="8"/>
+                    <Border Grid.Column="0" WidthRequest="60" HeightRequest="60" StrokeShape="RoundRectangle 8" Padding="0" StrokeThickness="0">
+                        <Image Source="spicy.png" Aspect="AspectFill"/>
+                    </Border>
                     <StackLayout Grid.Column="1" Spacing="4">
-                        <Label Text="Urban Spice" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Indian restaurant" FontSize="14" TextColor="Gray"/>
+                        <Label Text="Royal Indian Restobar" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Modern Indian" FontSize="14" TextColor="Gray"/>
                     </StackLayout>
                     <Label Grid.Column="2" Text="4.7" FontSize="16" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
                 </Grid>

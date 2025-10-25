@@ -8,12 +8,11 @@
 
     <Grid Padding="24">
         <Grid RowDefinitions="*,Auto,*">
-            <Frame Grid.Row="1" Padding="20" CornerRadius="16 "
-             BackgroundColor="GhostWhite" HasShadow="True">
+            <Frame Grid.Row="1" Padding="20" CornerRadius="16" BackgroundColor="GhostWhite" HasShadow="True">
                 <VerticalStackLayout Spacing="12">
                     <Image Source="biite_icon.png" HeightRequest="64" HorizontalOptions="Center"/>
-                    <Entry Placeholder="Email" Keyboard="Email"/>
-                    <Entry Placeholder="Password" IsPassword="True"/>
+                    <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email"/>
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
                     <Button Text="Log In" BackgroundColor="#E4A44D" TextColor="Black" Clicked="OnLoginClicked"/>
                     <Button Text="Create Account" BackgroundColor="#E4A44D" TextColor="Black" Clicked="OnSignUpClicked"/>
                 </VerticalStackLayout>

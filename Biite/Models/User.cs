@@ -19,8 +19,10 @@ public class User : ObservableObject
 		public string PhoneNumber { get; set; }
 		public string Password { get; set; }
 		public string Location { get; set; }
+		public string Restriction { get; set; }
+		
 
-		//added to store profile image paths
+        //added to store profile image paths
         public string ImageFilePath { get; set; }
 
 

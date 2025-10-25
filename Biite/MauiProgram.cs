@@ -1,5 +1,5 @@
 ﻿using Biite.Pages;
-//using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
 namespace Biite;
@@ -11,7 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            //.UseMauiCommunityToolkit() Use when you figure out why following the steps in Microsoft webpage did not work with correct package
+            .UseMauiCommunityToolkit() //Use when you figure out why following the steps in Microsoft webpage did not work with correct package
             .ConfigureFonts(fonts =>
            
             {

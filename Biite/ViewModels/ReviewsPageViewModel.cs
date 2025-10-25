@@ -20,7 +20,12 @@ namespace Biite.ViewModels
         {
             get
             {
-                return connection.Table<Review>().Where(r => r.UserId == 1).OrderByDescending(r => r.ReviewDate).ToList();
+                var currentUser = DatabaseService.GetCurrentUser();
+                if (currentUser == null)
+                    return new List<Review>();
+
+                // uses the user specific method from DatabaseService
+                return DatabaseService.GetUserReviews(currentUser.Id);
             }
         }
 

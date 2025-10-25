@@ -13,8 +13,10 @@ namespace Biite.ViewModels
     private string email;
     private string phoneNumber;
     private string location;
+    private string restriction;
+    private string password;
 
-    public SetUpPageViewModel()
+        public SetUpPageViewModel()
     {
         Current = this;
         connection = DatabaseService.Connection;
@@ -60,7 +62,27 @@ namespace Biite.ViewModels
         }
     }
 
-    public void SaveUser(User user)
+
+    public string Restriction
+    {
+        get => restriction;
+        set
+        {
+            restriction = value;
+            OnPropertyChanged();
+        }
+    }
+    public string Password
+    {
+        get => password;
+        set
+        {
+             password = value;
+             OnPropertyChanged();
+        }
+    }
+
+        public void SaveUser(User user)
     {
         if (user.Id > 0)
         {
@@ -79,7 +101,9 @@ namespace Biite.ViewModels
             Name = Name,
             Email = Email,
             PhoneNumber = PhoneNumber,
-            Location = Location
+            Location = Location,
+            Restriction = Restriction,
+            Password = Password
         };
         SaveUser(user);
     }

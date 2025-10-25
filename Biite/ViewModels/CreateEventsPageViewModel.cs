@@ -1,6 +1,7 @@
 using Biite.Models;
 using Biite.Services;
 using SQLite;
+using Biite.Services.PartialMethods;
 
 namespace Biite.ViewModels
 {
@@ -23,7 +24,7 @@ namespace Biite.ViewModels
             }
         }
 
-        public void SaveEvent(string eventTitle, DateTime eventDate, TimeSpan eventTime, string location, List<int> selectedFriendIds)
+        public void SaveEvent(string eventTitle, DateTime eventDate, TimeSpan eventTime, string location, List<int> selectedFriendIds, double latitude, double longitude)
         {
             var eventDateTime = eventDate.Date + eventTime;
 
@@ -32,16 +33,50 @@ namespace Biite.ViewModels
                 Title = eventTitle,
                 EventDate = eventDateTime,
                 Location = location,
-                HostUserId = 1,
-                IsPastEvent = false
+                HostUserId = DatabaseService.CurrentUserId.Value, //updated from 1 to use logged in user id
+                IsPastEvent = false,
+                Latitude = latitude,     
+                Longitude = longitude
             };
 
-            if (newEvent.Id > 0)
-                connection.Update(newEvent);
-            else
-                connection.Insert(newEvent);
+            /* if (newEvent.Id > 0)
+                 connection.Update(newEvent);
+             else
+                 connection.Insert(newEvent); */
+
+            DatabaseService.SaveEvent(newEvent);
 
             DatabaseService.SaveEventAttendees(newEvent.Id, selectedFriendIds);
+
+        
+            ScheduleEventNotification(newEvent);
+        }
+
+        private void ScheduleEventNotification(Event eventItem)
+        {
+            // calculates the notification time to be 1 hour before event
+            DateTime notificationTime = eventItem.EventDate.AddHours(-1);
+
+            // only schedules if notification time is in the future
+            if (notificationTime > DateTime.Now)
+            {
+                string title = "Event Reminder";
+                string message = $"{eventItem.Title} starts in 1 hour!";
+
+                NotificationService.SendNotification(title, message, notificationTime);
+            }
+            else if (eventItem.EventDate > DateTime.Now)
+            {
+                // If event is less than 1 hour away but still in the future
+                // Send notification 10 seconds from now
+                DateTime immediateTime = DateTime.Now.AddSeconds(10);
+
+                string title = "Event Starting Soon!";
+                string message = $"{eventItem.Title} is starting soon!";
+
+                NotificationService.SendNotification(title, message, immediateTime);
+
+            }
         }
     }
 }

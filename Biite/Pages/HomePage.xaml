@@ -10,7 +10,8 @@
                 <Button Grid.Column="1" Text="Add Review" BackgroundColor="#E4A44D" TextColor="Black" Clicked="AddReview_Clicked"/>
             </Grid>
 
-            <Grid>
+            <VerticalStackLayout Spacing="16" IsVisible="{Binding HasRecentReview}">
+                <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -19,55 +20,73 @@
                     <Label Text="My Recent Reviews" FontAttributes="Bold" FontSize="18"/>
                     
                 </Grid>
-                <Frame Grid.Row="1" Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.9">
-                    <VerticalStackLayout>
-                        <Label Text="{Binding LastReview.RestaurantName}" FontAttributes="Bold"/>
-                        <Label Text="{Binding LastReview.ReviewSnippet}"/>
-                        <Label Text="{Binding LastReview.Stars, StringFormat='{0} stars'}"/>
-                        <Frame Grid.Row="1" IsVisible="{Binding LastReview.HasPhoto}" Padding="0" CornerRadius="8" HeightRequest="150" HasShadow="False" Margin="0,5">
-                            <Image Source="{Binding LastReview.ImageFilePath}" Aspect="AspectFill"/>
-                        </Frame>
-                    </VerticalStackLayout>
-                </Frame>
+                    <Frame Grid.Row="1" Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.9">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding LastReview.RestaurantName}" FontAttributes="Bold"/>
+                            <Label Text="{Binding LastReview.ReviewSnippet}"/>
+                            <Label Text="{Binding LastReview.Stars, StringFormat='{0} stars'}"/>
+                            <Frame Grid.Row="1" IsVisible="{Binding LastReview.HasPhoto}" Padding="0" CornerRadius="8" HeightRequest="150" HasShadow="False" Margin="0,5">
+                                <Image Source="{Binding LastReview.ImageFilePath}" Aspect="AspectFill"/>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Nearby Restaurants hardcoded instead of pulling from DatabaseService for cleaner look-->
+            <Grid RowDefinitions="Auto,Auto">
+                <Label Text="Nearby Restaurants" FontAttributes="Bold" FontSize="18"/>
+                <VerticalStackLayout Grid.Row="1" Spacing="10">
+                    <!-- Mario's Italian -->
+                    <Frame Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.92">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                            <Label Text="Mario's Italian" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="Italian"/>
+                            <HorizontalStackLayout Grid.Column="1" Grid.RowSpan="2" Spacing="8" VerticalOptions="Center">
+                                <Label Text="$$"/>
+                                <Label Text="4.5 stars"/>
+                                <Label Text="0.5 km"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Sushi Palace -->
+                    <Frame Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.92">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                            <Label Text="Sushi Palace" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="Japanese"/>
+                            <HorizontalStackLayout Grid.Column="1" Grid.RowSpan="2" Spacing="8" VerticalOptions="Center">
+                                <Label Text="$$$"/>
+                                <Label Text="4.8 stars"/>
+                                <Label Text="0.8 km"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
             </Grid>
 
-            <Label Text="Nearby Restaurants" FontAttributes="Bold" FontSize="18"/>
-            <CollectionView ItemsSource="{Binding Nearby}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="12" CornerRadius="12" Margin="0,0,0,10" BackgroundColor="GhostWhite" Opacity="0.92">
-                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
-                                <Label Grid.Row="1" Text="{Binding Cuisine}"/>
-                                <HorizontalStackLayout Grid.Column="1" Grid.RowSpan="1" Spacing="8" VerticalOptions="Center">
-                                    <Label Text="{Binding Price}"/>
-                                    <Label Text="{Binding Rating, StringFormat='{0:0.0} stars'}"/>
-                                    <Label Text="{Binding DistanceKm, StringFormat='{0:0.0} km'}"/>
-                                </HorizontalStackLayout>
-                                
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <!-- Upcoming Events -->
+            <Grid RowDefinitions="Auto,Auto">
+                <Label Text="Upcoming Events" FontAttributes="Bold" FontSize="18"/>
 
-            <Label Text="Upcoming Events" FontAttributes="Bold" FontSize="18"/>
-            <CollectionView ItemsSource="{Binding Upcoming}" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="12" CornerRadius="12" BackgroundColor="GhostWhite" Opacity="0.92">
-                            <VerticalStackLayout>
-                               
-                                <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                                <Label Text="{Binding When}"/>
-                                <Label Text="{Binding TotalPeople, StringFormat='{0} people'}"/>
-
-                                
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Upcoming}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="12" 
+                                   CornerRadius="12" 
+                                   BackgroundColor="GhostWhite" 
+                                   Opacity="0.92"
+                                   Margin="0,0,0,10">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                                    <Label Text="{Binding When}"/>
+                                    <Label Text="{Binding TotalPeople, StringFormat='{0} people'}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

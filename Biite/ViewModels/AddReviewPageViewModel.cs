@@ -55,6 +55,14 @@ namespace Biite.ViewModels
        // public void SaveReview()
        public async Task SaveReview (string photoPath = null) //fixed using MAUI suggestion dunno why it works but no errors anymore
         {
+            var currentUser = DatabaseService.GetCurrentUser();
+
+            // safety check - should not happen if user is logged in
+            if (currentUser == null)
+            {
+                return;
+            }
+
             var location = await GetCurrentLocationAsync(); //something was wrong maui suggestion fixed it 
             var review = new Review
             {
@@ -62,16 +70,21 @@ namespace Biite.ViewModels
                 ReviewSnippet = string.IsNullOrWhiteSpace(ReviewText) ? "No review text" : ReviewText,
                 Stars = Rating, //rating uses double so Review.Stars should be double; not anymore now its int because couldnt use toolkt
                 ReviewDate = DateTime.Now,
-                UserId = 1,  //because only me as user
+                UserId = currentUser.Id,
                 Latitude = location.Latitude,
                 Longitude = location.Longitude,
                 ImageFilePath = photoPath
             };
 
-            if (review.Id > 0)
-                connection.Update(review);
-            else
-                connection.Insert(review);
+            DatabaseService.SaveReview(review);
+
+            HomePageViewModel.Current?.RefreshData();
+            ProfilePageViewModel.Current?.RefreshData();
+
+            /*   if (review.Id > 0)
+                   connection.Update(review);
+               else
+                   connection.Insert(review); */
         }
 
 

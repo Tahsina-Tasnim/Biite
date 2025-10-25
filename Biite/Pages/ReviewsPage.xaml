@@ -23,7 +23,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="GhostWhite" Padding="15" Margin="0,0,0,10" CornerRadius="12">
-                            <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto, Auto" ColumnDefinitions="*,Auto">
 
                                 <!-- name mandatory --> 
                                 <Label Grid.Row="0" Grid.Column="0" Text="{Binding RestaurantName}" FontAttributes="Bold" FontSize="16"/>
@@ -35,12 +35,12 @@
                                 <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding ReviewSnippet}" FontSize="14" Margin="0,5,0,0"/>
 
                                 <!-- location-->
-                                <Label Grid.Row="3" Grid.ColumnSpan="3" Text="{Binding LocationDisplay}" FontSize="10" TextColor="Gray" Margin="0,2,0,0"/>
+                                <Label Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding LocationDisplay}" FontSize="10" TextColor="Gray" Margin="0,2,0,0"/>
 
                                 <!-- date -->
-                                <Label Grid.Row="2" Grid.ColumnSpan="4" Text="{Binding ReviewDate, StringFormat='{0:MMM dd, yyyy}'}" FontSize="12" TextColor="Gray" Margin="0,5,0,0"/>
+                                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding ReviewDate, StringFormat='{0:MMM dd, yyyy}'}" FontSize="12" TextColor="Gray" Margin="0,5,0,0"/>
 
-                                <Frame Grid.Row="1" IsVisible="{Binding HasPhoto}" Padding="0" CornerRadius="8" HeightRequest="200" HasShadow="False" Margin="0,5">
+                                <Frame Grid.Row="2" Grid.ColumnSpan="2" IsVisible="{Binding HasPhoto}" Padding="0" CornerRadius="8" HeightRequest="200" HasShadow="False" Margin="0,5">
                                     <Image Source="{Binding ImageFilePath}" Aspect="AspectFill"/>
                                 </Frame>
 

@@ -19,6 +19,8 @@ public class Restaurant : ObservableObject
 		public string Address { get; set; }
 		public double Rating { get; set; }
 		public double DistanceKm { get; set; }
+		public double Latitude { get; set; }
+		public double Longitude { get; set; }
 	
 	}
 }
