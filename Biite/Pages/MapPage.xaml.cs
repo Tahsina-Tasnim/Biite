@@ -1,6 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
-using Biite.Services;      
+using Biite.Services;
 using Biite.Models;
 using System.Globalization;
 
@@ -31,10 +31,10 @@ namespace Biite.Pages
         {
             base.OnAppearing();
 
-            // Center map on user location
+            // centers the map on user location
             await CenterMapOnUserLocation();
 
-            // Add restaurant pins
+            // add restaurant pins
             AddRestaurantPins();
         }
 
@@ -42,7 +42,7 @@ namespace Biite.Pages
         {
             if (isLocationPickerMode)
             {
-                // Location picker mode
+                // location picker mode
                 Title = "Choose Event Location";
                 SearchBar.IsVisible = false;
                 EventLocation.IsVisible = true;
@@ -50,11 +50,11 @@ namespace Biite.Pages
             }
             else
             {
-                // Restaurant discovery mode
+                // restaurant discovery mode
                 Title = "Find Restaurants";
                 SearchBar.IsVisible = true;
                 EventLocation.IsVisible = false;
-                ConfirmButton.IsVisible = false;
+                ConfirmButton.IsVisible = false; //hides the confirm button on discovery page
             }
         }
 
@@ -107,16 +107,16 @@ namespace Biite.Pages
                     args.HideInfoWindow = false;
                     if (isLocationPickerMode)
                     {
-                        // Remove previous selected pin if exists
+                        // remove previous selected pin if exists
                         if (selectedPin != null)
                         {
                             map.Pins.Remove(selectedPin);
                         }
 
-                        // Set the restaurant location as selected
+                        // set the restaurant location as selected
                         selectedLocation = pin.Location;
 
-                        // Create a new pin to show selection
+                        // create a new pin to show selection
                         selectedPin = new Pin
                         {
                             Label = "Event Location",
@@ -128,7 +128,7 @@ namespace Biite.Pages
                         map.Pins.Add(selectedPin);
                         ConfirmButton.IsEnabled = true;
 
-                        args.HideInfoWindow = true; // Hide the restaurant info window
+                        args.HideInfoWindow = true; // hide the restaurant info window
                     }
                 };
 
@@ -160,13 +160,13 @@ namespace Biite.Pages
             }
             else
             {
-                // Remove previous temporary pin if exists
+                // remove previous temporary pin if exists
                 if (selectedPin != null)
                 {
                     map.Pins.Remove(selectedPin);
                 }
 
-                // Create temporary pin at tapped location
+                // create temporary pin at tapped location
                 selectedPin = new Pin
                 {
                     Label = "📍 Tapped Location",
@@ -190,8 +190,8 @@ namespace Biite.Pages
                 // passes the location back to CreateEventsPage
                 var navigationParameter = new Dictionary<string, object>
                 {
-                    { "Latitude", selectedLocation.Latitude.ToString(CultureInfo.InvariantCulture) },
-                    { "Longitude", selectedLocation.Longitude.ToString(CultureInfo.InvariantCulture) },
+                    { "Latitude", selectedLocation.Latitude },
+                    { "Longitude", selectedLocation.Longitude },
                     { "LocationName", $"📍 ({selectedLocation.Latitude:F4}, {selectedLocation.Longitude:F4})" }
                 };
 

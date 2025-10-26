@@ -8,42 +8,17 @@
     <Grid RowDefinitions="Auto, Auto, *, Auto">
 
         <!-- search bar (non-functional, just for UI) -->
-        <SearchBar x:Name="SearchBar" Grid.Row="0"
-                   Placeholder="Search restaurants..."
-                   IsEnabled="False"
-                   Margin="15,15,15,5"
-                   BackgroundColor="GhostWhite"/>
+        <SearchBar x:Name="SearchBar" Grid.Row="0" Placeholder="Search restaurants..." IsEnabled="False" Margin="15,15,15,5" BackgroundColor="GhostWhite"/>
 
         <!-- map -->
-        <maps:Map x:Name="map"
-                  Grid.Row="2"
-                  IsShowingUser="True"
-                  MapType="Street"
-                  MapClicked="OnMapClicked"/>
+        <maps:Map x:Name="map" Grid.Row="2" IsShowingUser="True" MapType="Street" MapClicked="OnMapClicked"/>
 
         <!--location picker for events creation-->
-        <Frame x:Name="EventLocation"
-               Grid.Row="1"
-               BackgroundColor="#E4A44D" 
-               Padding="15" 
-               Margin="10,10,10,5"
-               CornerRadius="8"
-               IsVisible="False">
-            <Label Text="📍 Tap anywhere on the map to set the event location" 
-                   TextColor="White"
-                   FontSize="14"
-                   HorizontalTextAlignment="Center"/>
+        <Frame x:Name="EventLocation" Grid.Row="1" BackgroundColor="#E4A44D"  Padding="15"  Margin="10,10,10,5" CornerRadius="8" IsVisible="False">
+            <Label Text="📍 Tap anywhere on the map to set the event location"  TextColor="White" FontSize="14" HorizontalTextAlignment="Center"/>
 
         </Frame>
 
-        <Button x:Name="ConfirmButton"
-                Grid.Row="3"
-                Text="Confirm Location"
-                BackgroundColor="#E4A44D"
-                TextColor="White"
-                Margin="15"
-                Clicked="OnConfirmClicked"
-                IsVisible="False"
-                IsEnabled="False"/>
+        <Button x:Name="ConfirmButton" Grid.Row="3" Text="Confirm Location" BackgroundColor="#E4A44D" TextColor="White" Margin="15" Clicked="OnConfirmClicked" IsVisible="False" IsEnabled="False"/>
     </Grid>
 </ContentPage>

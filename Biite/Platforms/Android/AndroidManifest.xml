@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 	<application android:allowBackup="true" android:icon="@mipmap/biite" android:supportsRtl="true" android:label="Biite">
-
-		<meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD36l4kCdEhO3lzkmU5r3-HN0v6YkXq8nw"/>
-
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD36l4kCdEhO3lzkmU5r3-HN0v6YkXq8nw" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +15,7 @@
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 	<uses-feature android:name="android.hardware.location" android:required="false" />
 	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
 	<uses-feature android:name="android.hardware.location.network" android:required="false" />

@@ -34,8 +34,9 @@ namespace Biite.Pages
             base.OnAppearing();
             viewModel.RefreshData();
 
-            /* TEST NOTIFICATION - scheduled for 10 seconds from now - okay it works !!!
-            DateTime testTime = DateTime.Now.AddSeconds(10);
+            // UNCOMMENT AND RUN THE APP TO TEST NOTIFICATIONS !!! :)
+            // TEST NOTIFICATION - scheduled for 10 seconds from now - okay it works !!!
+           /* DateTime testTime = DateTime.Now.AddSeconds(10);
             NotificationService.SendNotification(
               "Biite Event Reminder",
               "Your dining event starts in 1 hour!",

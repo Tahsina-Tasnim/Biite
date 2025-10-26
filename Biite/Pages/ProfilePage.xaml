@@ -41,10 +41,10 @@
                 </Grid>
             </Frame>
 
-            <!-- preferences -->
+            <!-- diet -->
             <Frame BackgroundColor="GhostWhite" Padding="20" CornerRadius="12">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Your Dietary Preferences" FontAttributes="Bold" FontSize="16"/>
+                    <Label Text="Your Dietary Restrictions" FontAttributes="Bold" FontSize="16"/>
                     <Frame BackgroundColor="#E4A44D" CornerRadius="15" Padding="8,5" HorizontalOptions="Start">
                         <Label Text="{Binding DietaryRestriction}" TextColor="White" FontSize="12"/>
                     </Frame>

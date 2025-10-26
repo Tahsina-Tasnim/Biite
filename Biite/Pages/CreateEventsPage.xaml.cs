@@ -17,36 +17,28 @@ namespace Biite.Pages
         private double eventLongitude;
         private string successMessage;
 
-        public string Latitude
+        public double Latitude
         {
             set
             {
-                // More robust parsing with invariant culture
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double lat))
-                    {
-                        eventLatitude = lat;
-                        //debug to see where the issue is DELETE once done EVERYWHERE
-                        System.Diagnostics.Debug.WriteLine($"Latitude set to: {eventLatitude}");
-                    }
-                }
+              
+                     eventLatitude = value;
+                     //debug to see where the issue is DELETE once done EVERYWHERE
+                     System.Diagnostics.Debug.WriteLine($"Latitude set to: {eventLatitude}");
+                    
+               
             }
         }
 
-        public string Longitude
+        public double Longitude
         {
             set
             {
-                // More robust parsing with invariant culture because Map was crashing the app when location was picked for events creation
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double lon))
-                    {
-                        eventLongitude = lon;
-                        System.Diagnostics.Debug.WriteLine($"Longitude set to: {eventLongitude}");
-                    }
-                }
+              
+                     eventLongitude = value;
+                     System.Diagnostics.Debug.WriteLine($"Longitude set to: {eventLongitude}");
+                    
+                
             }
         }
 
@@ -74,7 +66,9 @@ namespace Biite.Pages
             EventTimePicker.Time = new TimeSpan(12, 0, 0);
         }
 
-         private async void OnPickLocationClicked(object sender, EventArgs e)
+
+        // navigates to map page for location picking
+        private async void OnPickLocationClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync($"{nameof(MapPage)}?IsLocationPicker=true");
         }

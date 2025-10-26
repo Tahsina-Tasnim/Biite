@@ -29,11 +29,11 @@ namespace Biite.Pages
             }
             else if (action == "Edit Name")
             {
-                await DisplayAlert("Info", "Edit name functionality coming soon!", "OK");
+                await EditName();
             }
             else if (action == "Edit Bio")
             {
-                await DisplayAlert("Info", "Edit bio functionality coming soon!", "OK");
+                await EditBio();
             }
         }
         private async Task LoadProfileImage()
@@ -76,8 +76,53 @@ namespace Biite.Pages
                 }
 
                 viewModel.UpdateProfileImage(newFile);
-                viewModel.RefreshData();
+                viewModel.RefreshData(); 
                 UpdateProfileImageVisibility(); 
+            }
+        }
+
+        // to upadte user name
+        private async Task EditName()
+        {
+            string currentName = viewModel.UserName;
+
+            string newName = await DisplayPromptAsync(
+                "Edit Name",
+                "Enter your name:",
+                initialValue: currentName,
+                maxLength: 50,
+                keyboard: Keyboard.Text,
+                placeholder: "Your name"
+            );
+
+            if (!string.IsNullOrWhiteSpace(newName) && newName != currentName)
+            {
+                viewModel.UpdateUserName(newName);
+                viewModel.RefreshData();
+                UpdateProfileImageVisibility(); // refresh the initial letter if no profile pic
+                await DisplayAlert("Success", "Name updated successfully!", "OK");
+            }
+        }
+
+        // to update user bio
+        private async Task EditBio()
+        {
+            string currentBio = viewModel.UserBio;
+
+            string newBio = await DisplayPromptAsync(
+                "Edit Bio",
+                "Enter your location/bio:",
+                initialValue: currentBio,
+                maxLength: 100,
+                keyboard: Keyboard.Text,
+                placeholder: " Tell us about yourself "
+            );
+
+            if (!string.IsNullOrWhiteSpace(newBio) && newBio != currentBio)
+            {
+                viewModel.UpdateUserBio(newBio);
+                viewModel.RefreshData(); 
+                await DisplayAlert("Success", "Bio updated successfully!", "OK");
             }
         }
 

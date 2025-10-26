@@ -7,7 +7,9 @@ namespace Biite
         //public static DatabaseService Database { get; private set; }
         public App()
         {
+            Application.Current.UserAppTheme = AppTheme.Light;
             InitializeComponent();
+            
             //Database = new DatabaseService();
 
         }

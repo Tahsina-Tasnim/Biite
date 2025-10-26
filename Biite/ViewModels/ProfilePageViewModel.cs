@@ -133,7 +133,30 @@ namespace Biite.ViewModels
             }
         }
 
-        
+        // updates username in database
+        public void UpdateUserName(string newName)
+        {
+            if (currentUser != null)
+            {
+                UserName = newName;
+                currentUser.Name = newName;
+                DatabaseService.UpdateUserName(currentUser.Id, newName);
+            }
+        }
+
+
+
+        // upadtes user bio in database
+        public void UpdateUserBio(string newBio)
+        {
+            if (currentUser != null)
+            {
+                UserBio = newBio;
+                DatabaseService.UpdateUserBio(currentUser.Id, newBio);
+            }
+        }
+
+
 
     }
 }

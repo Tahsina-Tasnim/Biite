@@ -122,6 +122,28 @@ namespace Biite.Services
             }
         }
 
+        // updates user name for current user 
+        public static void UpdateUserName(int userId, string name)
+        {
+            var user = Connection.Table<User>().FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.Name = name;
+                Connection.Update(user);
+            }
+        }
+
+        // updates user bio/location for current user
+        public static void UpdateUserBio(int userId, string bio)
+        {
+            var user = Connection.Table<User>().FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.Location = bio;
+                Connection.Update(user);
+            }
+        }
+
         // restaurants data returned as a list as closest "SELECT * FROM ... ORDER BY DistanceKM" - SQL version
         public static List<Restaurant> GetNearbyRestaurants()
         {
